@@ -13,6 +13,29 @@
         android:theme="@style/Theme.ProjectAkhirBudaya"
         tools:targetApi="31">
         <activity
+            android:name=".user.SavedBudayaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user.DetailUserViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".user.UserViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditBudayaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ProjectAkhirBudaya" />
+        <activity
+            android:name=".AddBudayaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.ProjectAkhirBudaya" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -23,7 +46,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

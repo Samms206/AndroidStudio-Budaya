@@ -28,8 +28,9 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:text="Halo Guys!"
+                android:textStyle="bold"
                 android:textSize="20sp"
-                android:textColor="@color/black"/>
+                android:textColor="@color/grey_primary"/>
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
@@ -45,14 +46,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_budaya"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_budaya"/>
+                    tools:listitem="@layout/item_budaya_admin"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
 <!--End Wrapper-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_addItem"
+        android:onClick="toAddData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/white"
+        android:src="@drawable/buttonfloating"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

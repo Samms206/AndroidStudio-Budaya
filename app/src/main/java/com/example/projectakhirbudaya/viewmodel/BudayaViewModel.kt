@@ -23,3 +23,4 @@ class BudayaViewModel(private val budayaRepository: BudayaRepository) : ViewMode
         budayaRepository.updateBudaya(budayaEntity)
     }
 }
+
