@@ -6,13 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [BudayaEntity::class], version = 1)
+@Database(entities = [BudayaEntity::class, UserEntity::class], version = 3)
 
 @TypeConverters(AppConverter::class)
 
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun budayaDao(): BudayaDao
+    abstract fun userDao(): UserDao
 
     companion object {
         @Volatile
@@ -26,6 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
                         context.applicationContext,
                         AppDatabase::class.java, "app_database"
                     )
+                        .fallbackToDestructiveMigration() //ini ditambahkan jika memiliki leih dari 1 entitiy
                         .build()
                 }
             }

@@ -1,6 +1,7 @@
 package com.example.projectakhirbudaya
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -161,6 +162,11 @@ class EditBudayaActivity : AppCompatActivity() {
         ).show()
 
         finish()
+    }
+
+    fun toMain(view: View) {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
 }

@@ -1,0 +1,25 @@
+package com.example.projectakhirbudaya.viewmodel
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import com.example.projectakhirbudaya.room.UserEntity
+import com.example.projectakhirbudaya.room.UserRepository
+
+class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
+
+    fun insertUser(user: UserEntity) {
+        userRepository.insertUser(user)
+    }
+
+    fun getAllUser(): LiveData<List<UserEntity>> {
+        return userRepository.getAllUser()
+    }
+
+    fun login(email: String, password: String, callback: (UserEntity?) -> Unit) {
+        userRepository.login(email, password, callback)
+    }
+
+    fun updateUser(user: UserEntity) {
+        userRepository.updateUser(user)
+    }
+}
