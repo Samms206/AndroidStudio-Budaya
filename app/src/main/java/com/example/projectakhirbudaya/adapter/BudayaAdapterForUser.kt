@@ -28,7 +28,7 @@ class BudayaAdapterForUser(private var dataList: List<BudayaEntity>, private val
     }
 
     interface OnItemClickCallback {
-        fun onMoreClicked(data: BudayaEntity, position: Int)
+        fun onClicked(data: BudayaEntity, position: Int)
     }
 
     class BudayaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -50,10 +50,14 @@ class BudayaAdapterForUser(private var dataList: List<BudayaEntity>, private val
         val data = dataList[position]
 
         holder.dataTitle.text = data.name
-        holder.dataDesc.text = data.description.shorten(500)
+        holder.dataDesc.text = data.description.shorten(50)
 
         val uri = Uri.fromFile(data.image)
         holder.dataImg.setImageURI(uri)
+
+        holder.itemView.setOnClickListener {
+            onItemClickCallback.onClicked(dataList[holder.absoluteAdapterPosition], holder.absoluteAdapterPosition)
+        }
 
  }
 

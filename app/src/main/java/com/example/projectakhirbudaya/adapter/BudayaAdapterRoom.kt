@@ -55,7 +55,7 @@ class BudayaAdapterRoom(private var dataList: List<BudayaEntity>, private val bu
 
         holder.dataTitle.text = data.name
         holder.dataLokasi.text = "lokasi : ${data.location}"
-        holder.dataDesc.text = data.description.shorten(500)
+        holder.dataDesc.text = data.description.shorten(30)
 
         val uri = Uri.fromFile(data.image)
         holder.dataImg.setImageURI(uri)
