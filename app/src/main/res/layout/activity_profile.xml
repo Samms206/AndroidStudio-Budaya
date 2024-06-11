@@ -43,6 +43,7 @@
             android:onClick="gotoProfile"
             app:shapeAppearanceOverlay="@style/circular"/>
         <TextView
+            android:id="@+id/txt_name_heading"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,6 +95,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txt_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="user@gmail.com"
@@ -114,6 +116,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txt_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="123"
@@ -169,14 +172,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Face"
+                android:text="Login Sebagai"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/txt_loginSebagai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cantik"
+                android:text="User"
                 android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>

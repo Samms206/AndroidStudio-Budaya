@@ -29,6 +29,11 @@ import java.io.File
 
 class EditBudayaActivity : AppCompatActivity() {
 
+    private var userId: Int = -1
+    private var userEmail: String = "testing@gmail.com"
+    private var userPass: String = "123"
+    private var userLevel: String = "user"
+
     private var currentImageUri: Uri? = null
     private var oldPhoto: File? = null
 
@@ -65,6 +70,12 @@ class EditBudayaActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //INTENT DATA
+        val extras = intent.extras
+        userId = extras?.getInt("id", -1) ?: -1
+        userEmail = extras?.getString("email", "testing@gmail.com") ?: "testing@gmail.com"
+        userPass = extras?.getString("password", "123") ?: "123"
+        userLevel = extras?.getString("level", "user") ?: "user"
 
         getData = intent.getParcelableExtra("dataBudaya")!!
         //
@@ -166,6 +177,10 @@ class EditBudayaActivity : AppCompatActivity() {
 
     fun toMain(view: View) {
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("id", userId)
+        intent.putExtra("email", userEmail)
+        intent.putExtra("password", userPass)
+        intent.putExtra("level", userLevel)
         startActivity(intent)
     }
 

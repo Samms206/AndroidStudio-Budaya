@@ -31,6 +31,8 @@ class DetailUserViewActivity : AppCompatActivity() {
 
     private var userId: Int = -1
     private var userEmail: String = "testing@gmail.com"
+    private var userPass: String = "123"
+    private var userLevel: String = "user"
 
     private lateinit var budayaViewModel: BudayaSavedViewModel
 
@@ -51,6 +53,8 @@ class DetailUserViewActivity : AppCompatActivity() {
         val extras = intent.extras
         userId = extras?.getInt("id", -1) ?: -1
         userEmail = extras?.getString("email", "testing@gmail.com") ?: "testing@gmail.com"
+        userPass = extras?.getString("password", "123") ?: "123"
+        userLevel = extras?.getString("level", "user") ?: "user"
 
         val getDataNama = intent.getStringExtra("namaBudaya")
         val getDataLokasi= intent.getStringExtra("lokasiBudaya")
@@ -102,13 +106,14 @@ class DetailUserViewActivity : AppCompatActivity() {
             //
         }
 
-
     }
 
     fun toMainUser(view: View) {
         val intent = Intent(this, UserViewActivity::class.java)
         intent.putExtra("id", userId)
         intent.putExtra("email", userEmail)
+        intent.putExtra("password", userPass)
+        intent.putExtra("level", userLevel)
         startActivity(intent)
     }
 }

@@ -1,8 +1,10 @@
 package com.example.projectakhirbudaya
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -20,11 +22,14 @@ class MainActivity : AppCompatActivity() {
 
     private var userId: Int = -1
     private var userEmail: String = "testing@gmail.com"
+    private var userPass: String = "123"
+    private var userLevel: String = "user"
 
     private lateinit var budayaViewModel: BudayaViewModel
     private lateinit var budayaAdapter : BudayaAdapterRoom
     private lateinit var recyclerView: RecyclerView
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,6 +44,11 @@ class MainActivity : AppCompatActivity() {
         val extras = intent.extras
         userId = extras?.getInt("id", -1) ?: -1
         userEmail = extras?.getString("email", "testing@gmail.com") ?: "testing@gmail.com"
+        userPass = extras?.getString("password", "123") ?: "123"
+        userLevel = extras?.getString("level", "user") ?: "user"
+
+        val txtWelcome = findViewById<TextView>(R.id.txt_welcome_admin)
+        txtWelcome.text = "Halo $userEmail"
 
         val factory = BudayaViewModelFactory.getInstance(this)
         budayaViewModel = ViewModelProvider(this, factory)[BudayaViewModel::class.java]
@@ -69,6 +79,8 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, ProfileActivity::class.java)
         intent.putExtra("id", userId)
         intent.putExtra("email", userEmail)
+        intent.putExtra("password", userPass)
+        intent.putExtra("level", userLevel)
         startActivity(intent)
     }
 

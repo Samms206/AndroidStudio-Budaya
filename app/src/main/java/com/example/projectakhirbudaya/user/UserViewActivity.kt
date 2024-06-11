@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,8 @@ class UserViewActivity : AppCompatActivity() {
 
     private var userId: Int = -1
     private var userEmail: String = "testing@gmail.com"
+    private var userPass: String = "123"
+    private var userLevel: String = "user"
 
     private lateinit var budayaViewModel: BudayaViewModel
     private lateinit var budayaAdapter : BudayaAdapterForUser
@@ -44,6 +47,11 @@ class UserViewActivity : AppCompatActivity() {
         val extras = intent.extras
         userId = extras?.getInt("id", -1) ?: -1
         userEmail = extras?.getString("email", "testing@gmail.com") ?: "testing@gmail.com"
+        userPass = extras?.getString("password", "123") ?: "123"
+        userLevel = extras?.getString("level", "user") ?: "user"
+
+        val txtWelcome = findViewById<TextView>(R.id.txt_welcome_user)
+        txtWelcome.text ="Hai $userEmail"
 
         val factory = BudayaViewModelFactory.getInstance(this)
         budayaViewModel = ViewModelProvider(this, factory)[BudayaViewModel::class.java]
@@ -70,6 +78,8 @@ class UserViewActivity : AppCompatActivity() {
             val intent = Intent(this, SavedBudayaActivity::class.java)
             intent.putExtra("id", userId)
             intent.putExtra("email", userEmail)
+            intent.putExtra("password", userPass)
+            intent.putExtra("level", userLevel)
             startActivity(intent)
         }
         val iconProfile = findViewById<ImageView>(R.id.icon_profile)
@@ -77,6 +87,8 @@ class UserViewActivity : AppCompatActivity() {
             val intent = Intent(this, ProfileActivity::class.java)
             intent.putExtra("id", userId)
             intent.putExtra("email", userEmail)
+            intent.putExtra("password", userPass)
+            intent.putExtra("level", userLevel)
             startActivity(intent)
         }
 
@@ -90,6 +102,8 @@ class UserViewActivity : AppCompatActivity() {
         // Menambahkan dan membawa data pemain ke intent dengan tujuan ke DetailPlayerActivity
         navigateToDetail.putExtra("id", userId)
         navigateToDetail.putExtra("email", userEmail)
+        navigateToDetail.putExtra("password", userPass)
+        navigateToDetail.putExtra("level", userLevel)
         navigateToDetail.putExtra("namaBudaya", data.name)
         navigateToDetail.putExtra("lokasiBudaya", data.location)
         navigateToDetail.putExtra("descBudaya", data.description)

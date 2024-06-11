@@ -55,12 +55,16 @@ class LoginActivity : AppCompatActivity() {
                         Intent(this, MainActivity::class.java).also {
                             it.putExtra("id", user.id)
                             it.putExtra("email", user.email)
+                            it.putExtra("password", user.password)
+                            it.putExtra("level", "admin")
                             startActivity(it)
                         }
                     } else if (user.level == "user") {
                         Intent(this, UserViewActivity::class.java).also {
                             it.putExtra("id", user.id)
                             it.putExtra("email", user.email)
+                            it.putExtra("password", user.password)
+                            it.putExtra("level", "user")
                             startActivity(it)
                         }
                     }
