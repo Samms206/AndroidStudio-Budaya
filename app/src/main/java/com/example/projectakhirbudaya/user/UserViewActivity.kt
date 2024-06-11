@@ -3,6 +3,7 @@ package com.example.projectakhirbudaya.user
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,9 @@ import kotlin.math.log
 
 class UserViewActivity : AppCompatActivity() {
 
+    private var userId: Int = -1
+    private var userEmail: String = "testing@gmail.com"
+
     private lateinit var budayaViewModel: BudayaViewModel
     private lateinit var budayaAdapter : BudayaAdapterForUser
     private lateinit var recyclerView: RecyclerView
@@ -36,6 +40,10 @@ class UserViewActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        //INTENT DATA
+        val extras = intent.extras
+        userId = extras?.getInt("id", -1) ?: -1
+        userEmail = extras?.getString("email", "testing@gmail.com") ?: "testing@gmail.com"
 
         val factory = BudayaViewModelFactory.getInstance(this)
         budayaViewModel = ViewModelProvider(this, factory)[BudayaViewModel::class.java]
@@ -55,6 +63,17 @@ class UserViewActivity : AppCompatActivity() {
                 })
             }
         }
+
+        val iconHome = findViewById<ImageView>(R.id.icon_home)
+        val iconBookmart = findViewById<ImageView>(R.id.icon_bookmart)
+        iconBookmart.setOnClickListener{
+            val intent = Intent(this, SavedBudayaActivity::class.java)
+            intent.putExtra("id", userId)
+            intent.putExtra("email", userEmail)
+            startActivity(intent)
+        }
+        val iconProfile = findViewById<ImageView>(R.id.icon_profile)
+
     }
 
 
@@ -62,12 +81,9 @@ class UserViewActivity : AppCompatActivity() {
         // Membuat intent untuk berpindah ke DetailPlayerActivity
         val navigateToDetail = Intent(this, DetailUserViewActivity::class.java)
 
-        Log.d(
-            "DetailData",
-            "Image: ${data.image}"
-        )
-
         // Menambahkan dan membawa data pemain ke intent dengan tujuan ke DetailPlayerActivity
+        navigateToDetail.putExtra("id", userId)
+        navigateToDetail.putExtra("email", userEmail)
         navigateToDetail.putExtra("namaBudaya", data.name)
         navigateToDetail.putExtra("lokasiBudaya", data.location)
         navigateToDetail.putExtra("descBudaya", data.description)

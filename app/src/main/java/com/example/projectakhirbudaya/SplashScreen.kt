@@ -21,11 +21,11 @@ class SplashScreen : AppCompatActivity() {
             insets
         }
         Handler(Looper.getMainLooper()).postDelayed({
-            gotoMain()
+            gotoLogin()
         }, 3000L)
     }
 
-    private fun gotoMain(){
+    private fun gotoLogin(){
         Intent(this, LoginActivity::class.java).also {
             startActivity(it)
             finish()

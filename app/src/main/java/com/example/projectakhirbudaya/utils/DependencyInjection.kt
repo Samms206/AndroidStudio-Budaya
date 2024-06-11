@@ -3,6 +3,7 @@ package com.example.projectakhirbudaya.utils
 import android.content.Context
 import com.example.projectakhirbudaya.room.AppDatabase
 import com.example.projectakhirbudaya.room.BudayaRepository
+import com.example.projectakhirbudaya.room.BudayaSavedRepository
 import com.example.projectakhirbudaya.room.UserRepository
 
 object DependencyInjection {
@@ -18,5 +19,12 @@ object DependencyInjection {
         val appExecutors = AppExecutors()
         val dao = database.userDao()
         return UserRepository.getInstance(dao, appExecutors)
+    }
+
+    fun provideBudayaSavedRepository(context: Context): BudayaSavedRepository {
+        val database = AppDatabase.getDatabase(context)
+        val appExecutors = AppExecutors()
+        val dao = database.budayaSavedDao()
+        return BudayaSavedRepository.getInstance(dao, appExecutors)
     }
 }

@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [BudayaEntity::class, UserEntity::class], version = 3)
+@Database(entities = [BudayaEntity::class, UserEntity::class, BudayaSavedEntity::class], version = 4)
 
 @TypeConverters(AppConverter::class)
 
@@ -14,6 +14,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun budayaDao(): BudayaDao
     abstract fun userDao(): UserDao
+    abstract fun budayaSavedDao(): BudayaSavedDao
 
     companion object {
         @Volatile
