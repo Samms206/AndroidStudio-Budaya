@@ -1,6 +1,7 @@
 package com.example.projectakhirbudaya.user
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -103,9 +104,40 @@ class DetailUserViewActivity : AppCompatActivity() {
 
         //Button Share
         btnShare.setOnClickListener {
-            //
+            val namaBudaya = title.text.toString()
+            val descBudaya = desc.text.toString()
+            val imgBudayaPath = getDataImage ?: return@setOnClickListener
+
+            // Membuat URI dari path gambar
+            val imgUri: Uri = File(imgBudayaPath).toUri()
+
+            // Membuat Intent untuk berbagi ke WhatsApp
+            val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                type = "image/*"
+                putExtra(Intent.EXTRA_STREAM, imgUri)
+                putExtra(Intent.EXTRA_TEXT, "Nama Budaya: $namaBudaya\nDeskripsi: $descBudaya")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                setPackage("com.whatsapp")
+            }
+
+            val whatsappInstalled = isPackageInstalled("com.whatsapp") || isPackageInstalled("com.whatsapp.w4b")
+            if (whatsappInstalled) {
+                shareIntent.setPackage("com.whatsapp")
+                startActivity(shareIntent)
+            } else {
+                Toast.makeText(this, "WhatsApp tidak terinstal.", Toast.LENGTH_SHORT).show()
+            }
         }
 
+    }
+
+    private fun isPackageInstalled(packageName: String): Boolean {
+        return try {
+            packageManager.getPackageInfo(packageName, 0)
+            true
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
     }
 
     fun toMainUser(view: View) {
