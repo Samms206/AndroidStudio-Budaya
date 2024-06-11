@@ -107,6 +107,8 @@ class DetailUserViewActivity : AppCompatActivity() {
 
     fun toMainUser(view: View) {
         val intent = Intent(this, UserViewActivity::class.java)
+        intent.putExtra("id", userId)
+        intent.putExtra("email", userEmail)
         startActivity(intent)
     }
 }

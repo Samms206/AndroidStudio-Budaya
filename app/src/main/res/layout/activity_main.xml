@@ -32,6 +32,8 @@
                 android:textSize="20sp"
                 android:textColor="@color/grey_primary"/>
             <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/btn_profile_admin"
+                android:onClick="forProfileAdmin"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 app:shapeAppearanceOverlay="@style/circular"

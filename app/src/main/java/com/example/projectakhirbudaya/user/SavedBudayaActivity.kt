@@ -17,6 +17,7 @@ import com.example.projectakhirbudaya.adapter.BudayaAdapterForSaved
 import com.example.projectakhirbudaya.adapter.BudayaAdapterForUser
 import com.example.projectakhirbudaya.adapter.BudayaAdapterRoom
 import com.example.projectakhirbudaya.room.BudayaEntity
+import com.example.projectakhirbudaya.room.BudayaSavedEntity
 import com.example.projectakhirbudaya.viewmodel.BudayaSavedViewModel
 import com.example.projectakhirbudaya.viewmodel.BudayaSavedViewModelFactory
 import com.example.projectakhirbudaya.viewmodel.BudayaViewModel
@@ -57,18 +58,21 @@ class SavedBudayaActivity : AppCompatActivity() {
                 budayaAdapter = BudayaAdapterForSaved(data, budayaViewModel) //ini
                 recyclerView.adapter = budayaAdapter
 
-//                budayaAdapter.setOnItemClickCallback(object :
-//                    BudayaAdapterForSaved.OnItemClickCallback {
-//                    override fun onMoreClicked(data: BudayaEntity, position: Int) {
-//                        PopUpFragment(data, position).show(supportFragmentManager, PopUpFragment.TAG)
-//                    }
-//                })
+                budayaAdapter.setOnItemClickCallback(object :
+                    BudayaAdapterForSaved.OnItemClickCallback {
+                    override fun onDeleteClicked(data: BudayaSavedEntity, position: Int) {
+                       budayaViewModel.deleteBudayaSaved(data)
+                    }
+
+                })
             }
         }
     }
 
     fun toMainUser(view: View) {
         val intent = Intent(this, UserViewActivity::class.java)
+        intent.putExtra("id", userId)
+        intent.putExtra("email", userEmail)
         startActivity(intent)
     }
 }

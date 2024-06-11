@@ -30,7 +30,7 @@ class BudayaAdapterForSaved(private var dataList: List<BudayaSavedEntity>, priva
     }
 
     interface OnItemClickCallback {
-        fun onMoreClicked(data: BudayaSavedEntity, position: Int)
+        fun onDeleteClicked(data: BudayaSavedEntity, position: Int)
     }
 
     class BudayaSavedViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -63,7 +63,7 @@ class BudayaAdapterForSaved(private var dataList: List<BudayaSavedEntity>, priva
         holder.dataImg.setImageURI(uri)
 
         holder.btnDelete.setOnClickListener {
-            onItemClickCallback.onMoreClicked(dataList[holder.absoluteAdapterPosition], holder.absoluteAdapterPosition)
+            onItemClickCallback.onDeleteClicked(dataList[holder.absoluteAdapterPosition], holder.absoluteAdapterPosition)
         }
 
  }

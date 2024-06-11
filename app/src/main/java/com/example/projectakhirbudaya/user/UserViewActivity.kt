@@ -73,6 +73,12 @@ class UserViewActivity : AppCompatActivity() {
             startActivity(intent)
         }
         val iconProfile = findViewById<ImageView>(R.id.icon_profile)
+        iconProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("id", userId)
+            intent.putExtra("email", userEmail)
+            startActivity(intent)
+        }
 
     }
 

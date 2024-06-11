@@ -12,10 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projectakhirbudaya.adapter.BudayaAdapterRoom
 import com.example.projectakhirbudaya.room.BudayaEntity
+import com.example.projectakhirbudaya.user.ProfileActivity
 import com.example.projectakhirbudaya.viewmodel.BudayaViewModel
 import com.example.projectakhirbudaya.viewmodel.BudayaViewModelFactory
 
 class MainActivity : AppCompatActivity() {
+
+    private var userId: Int = -1
+    private var userEmail: String = "testing@gmail.com"
 
     private lateinit var budayaViewModel: BudayaViewModel
     private lateinit var budayaAdapter : BudayaAdapterRoom
@@ -30,6 +34,11 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        //INTENT DATA
+        val extras = intent.extras
+        userId = extras?.getInt("id", -1) ?: -1
+        userEmail = extras?.getString("email", "testing@gmail.com") ?: "testing@gmail.com"
 
         val factory = BudayaViewModelFactory.getInstance(this)
         budayaViewModel = ViewModelProvider(this, factory)[BudayaViewModel::class.java]
@@ -53,6 +62,13 @@ class MainActivity : AppCompatActivity() {
 
     fun toAddData(view: View) {
         val intent = Intent(this, AddBudayaActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun forProfileAdmin(view: View) {
+        val intent = Intent(this, ProfileActivity::class.java)
+        intent.putExtra("id", userId)
+        intent.putExtra("email", userEmail)
         startActivity(intent)
     }
 
